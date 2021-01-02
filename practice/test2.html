@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
+  <style>
+    #root {
+      height: 100vh;
+      width: 100vw;
+
+      display: grid;
+      place-items: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"><button>go random</button></div>
+  <script>
+    /* eslint-disable */
+    const $root = document.getElementById('root');
+    const $button = document.querySelector('button');
+
+    $button.onclick = setRandomBgColor;
+
+    // a function sets a random color as backgroundColor of $root
+    function setRandomBgColor() {
+      $button.nextElementSibling
+
+    }
+
+    // a function returns 'random color value' in string type
+    // e.g. 'rgb(256,43,50)' / '#ace'
+    function getRandomColor() {
+
+    }
+  </script>
+</body>
+
+</html>

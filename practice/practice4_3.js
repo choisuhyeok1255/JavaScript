@@ -1,7 +1,7 @@
 function alphaString46(s = '') {
   if (s.length > 3 && s.length < 7) {
     for (let i = 0; i < s.length; i++) {
-      if (s[i]+0 === 'string') {
+      if (isNaN(+s[i])) {
         return false;
       }
     }

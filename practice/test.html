@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>To do list fuck</div>
+  <label>
+    <input id="list" type="text" autocomplete="off">
+    <button id='btn'>눌러</button>
+  </label>
+
+  <ul id="todolist"></ul>
+
+  <script>
+    const $todo = document.getElementById('todolist');
+    const $input = document.getElementById('list');
+    const $btn = document.getElementById('btn');
+
+    $btn.onclick = function () {
+      if ($input.value.length < 1) return;
+
+      const $li = document.createElement('li');
+      const $textNode = document.createTextNode($input.value);
+      $li.appendChild($textNode);
+      $todo.appendChild($li);
+      $input.value = '';
+
+      const $button = document.createElement('button');
+      const $buttonText = document.createTextNode('X');
+      $button.appendChild($buttonText);
+      $todo.appendChild($button);
+
+      const $check = document.createElement('input');
+      $check.setAttribute('type', 'checkbox');
+      $todo.appendChild($check);
+
+      const [$list, $checkbox] = $todo.children;
+      $todo.appendChild($checkbox);
+      $todo.insertBefore($list, $todo.lastElementChild);
+
+      $check.onclick = e => {
+        
+      }
+    }
+  </script>
+</body>
+
+</html>

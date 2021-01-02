@@ -1,16 +1,9 @@
-let userState = {
-  loading: true,
-  user: null,
-  error: null,
-};
-
-const newUser = { name: 'domuk', age: 18};
-
-function updateUser(userObj, state = userState){
-  return const userObj{loading, user:state, error};
-
+function toWeirdCase(s) {
+  let data = s.split('');
+  let start = 0;
+  for (let i = 0; i < data.length; i++) {
+      if (!(start++ % 2)) data[i] = data[i].toUpperCase();      
+      if (data[i] === ' ') start = 0; 
+  }
+  return data.join(' ');
 }
-
-userState = updateUser(newUser);
-
-console.log(userState);

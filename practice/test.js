@@ -1,1 +1,1 @@
-console.log(typeof('a'+0));
+console.log(Math.sqrt(999));
