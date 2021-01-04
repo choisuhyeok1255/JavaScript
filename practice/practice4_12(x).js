@@ -1,6 +1,6 @@
 function uniq(array) {
   const a = [];
-  const res = array.filter();
+  const res = array.filter(i => );
 
   console.log(res);
 }
