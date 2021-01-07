@@ -5,14 +5,13 @@ function adder(x, y) {
   temp.sort();
 
   const arr = [];
-
-  for (let i = 0; i < temp[1] - temp[0] + 1; i++) {
-    arr.push(temp[0] + i);
+  let res = 0;
+  for (let i = temp[0]; i < temp[1] + 1; i++) {
+    res += i;
   }
 
-  console.log(arr);
-
+  return res;
 }
 
 console.log(adder(3, 5)); // 12
-console.log(adder(3, 5)); // 12
+console.log(adder(1, 5)); // 12
