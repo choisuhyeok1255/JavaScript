@@ -1,6 +1,6 @@
 function nextSqaure(n) {
-  if (Math.sqrt(n) === n**n) {
-    return (n+1)**(n+1);
+  for (let i = 0; i <= n; i++) {
+    if (i * i === n) return (i + 1) ** 2;
   }
   return 'no';
 }
