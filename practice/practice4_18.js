@@ -1,7 +1,10 @@
 function fibonacci(n) {
-  const temp = [0];
+  const temp = [0, 1];
 
-  
+  for (let i = 0; i < n - 1; i++) {
+    temp[i + 2] = temp[i] + temp[i + 1];
+  }
+  return temp[n];
 }
 
 console.log(fibonacci(2)); // 1
