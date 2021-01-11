@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Todos 2.0</title>
+    <link href="css/style.css" rel="stylesheet" />
+    <!-- <script defer src="js/app.js"></script> -->
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title">Todos</h1>
+      <div class="ver">2.0</div>
+
+      <input class="input-todo" placeholder="What needs to be done?" autofocus />
+      <ul class="todos">
+        <!-- <li id="1" class="todo-item">
+        <input id="ck-1" class="checkbox" type="checkbox">
+        <label for="ck-1">HTML</label>
+        <i class="remove-todo far fa-times-circle"></i>
+      </li> -->
+      </ul>
+
+      <footer>
+        <div class="complete-all">
+          <input class="checkbox" type="checkbox" id="ck-complete-all" />
+          <label for="ck-complete-all">Mark all as complete</label>
+        </div>
+        <div class="clear-completed">
+          <button class="btn">Clear completed (<span class="completed-todos">0</span>)</button>
+          <strong class="active-todos">0</strong> items left
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      let todos = [];
+
+      const $add = document.querySelector('input');
+      const $todos = document.querySelector('.todos');
+      const $remove = document.querySelector('ul');
+      const $completeAll = document.querySelector('.complete-all');
+      const $checkbox = document.querySelector('.checkbox');
+      const $clear = document.querySelector('.clear-completed');
+      const $completedTodos = document.querySelector('.completed-todos');
+      const $activeTodos = document.querySelector('.active-todos');
+
+      const makeId = () => {
+        if(todos.length === 0) return 0;
+        return todos.length;
+      };
+
+      const render = () => {        
+        $todos.innerHTML = todos.map(todo =>`<li id="${todo.id}" class="todo-item">
+          <input id="ck-${todo.id}" class="checkbox" type="checkbox" ${todo.completed ? 'checked' : ''}>
+          <label for="ck-${todo.id}" style = "${todo.completed ? 'text-decoration: line-through' : ''}">${todo.content}</label>
+          <i class="remove-todo far fa-times-circle"></i>
+          </li>`).join('');
+
+        // const $remove = document.querySelectorAll('i');
+        // console.log($remove);
+        // for(let i = 0; i < $remove.length; i++){
+        //   $remove[i].addEventListener('click', e => console.log(e));
+        // }
+        
+        // Clear completed의 숫자
+        $completedTodos.firstChild.nodeValue = todos.filter(todo => todo.completed === true).length;
+
+        // items left의 숫자
+        $activeTodos.firstChild.nodeValue = todos.filter(todo => todo.completed === false).length;
+      };
+
+      //todos 리스트 추가
+      $add.onkeyup = e => {
+        if (e.key !== 'Enter' || $add.value.length < 1) return;
+
+        todos = [{ id: makeId() + 1, content: $add.value, completed: false }, ...todos];
+        
+        $add.value = '';
+        $add.focus();
+
+        render();
+      };
+
+      //todos 리스트 삭제
+      $remove.onclick = e => {
+
+        if (!e.target.classList.contains('remove-todo')) return;
+        // console.log(e.target.parentNode.id);
+        // todos.map(todo => console.log(todo.id));
+        todos = todos.filter(todo => +e.target.parentNode.id !== +todo.id);
+
+
+         // 리스트 삭제가 다 되면 체크 자동 풀림
+         if (todos.length === 0) $checkbox.checked = false;
+
+        render();
+      };
+
+      // list 체크표시
+      $remove.onchange = e => {
+        
+        todos = todos.map(todo => {
+          if (todo.id === +e.target.parentNode.id){
+            return { ...todo, completed: todo.completed ? false : true};
+          } else{
+            return {...todo};
+          }
+        });
+
+        // todos = todos.map(todo => {
+        //   if(e.target.parentNode.id === todo.id){
+        //     { completed: todo.completed ? false : true};
+        //   }
+        // });
+
+        render();
+        
+        // todos = [{id: todo.id, content: todo.content, ${todo.completed ? false : true}}];
+      };
+
+      //Mark all as complete 체크하기
+      $completeAll.onchange = e => {
+        todos = todos.map(todo => ({ ...todo, completed: $checkbox.checked }));
+        render();
+      };
+
+      //Clear completed btn
+      $clear.onclick = () => {
+        todos = todos.filter(todo => todo.completed === false);
+
+        render();
+      };
+
+    </script>
+  </body>
+</html>
