@@ -36,6 +36,7 @@
 
     <script>
       let todos = [];
+      let count = 0;
 
       const $add = document.querySelector('input');
       const $todos = document.querySelector('.todos');
@@ -69,6 +70,18 @@
 
         // items left의 숫자
         $activeTodos.firstChild.nodeValue = todos.filter(todo => todo.completed === false).length;
+
+        // 리스트 삭제가 다 되면 체크 자동 풀림
+        if (todos.length === 0) $checkbox.checked = false;
+
+        // 리스트 전체가 체크되면 Mark all as complete 자동 체크
+        count = todos.filter(todo => todo.completed === true);
+        if(count.length === todos.length) $checkbox.checked = true;
+
+        // 리스트 중 모두 체크에서 한개라도 풀리면 Mark all as complete 체크 풀림
+        todos.map(todo => {
+          if(todo.completed === false) $checkbox.checked = false;
+        });
       };
 
       //todos 리스트 추가
@@ -90,10 +103,6 @@
         // console.log(e.target.parentNode.id);
         // todos.map(todo => console.log(todo.id));
         todos = todos.filter(todo => +e.target.parentNode.id !== +todo.id);
-
-
-         // 리스트 삭제가 다 되면 체크 자동 풀림
-         if (todos.length === 0) $checkbox.checked = false;
 
         render();
       };
